@@ -19,6 +19,10 @@ class Exercise
     #[ORM\Column(length: 100)]
     private ?string $type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'exercises')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?MuscleGrup $muscleGrup_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Exercise
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getMuscleGrupId(): ?MuscleGrup
+    {
+        return $this->muscleGrup_id;
+    }
+
+    public function setMuscleGrupId(?MuscleGrup $muscleGrup_id): static
+    {
+        $this->muscleGrup_id = $muscleGrup_id;
 
         return $this;
     }
