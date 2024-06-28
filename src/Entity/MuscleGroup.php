@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\MuscleGrupRepository;
+use App\Repository\MuscleGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MuscleGrupRepository::class)]
-class MuscleGrup
+#[ORM\Entity(repositoryClass: MuscleGroupRepository::class)]
+class MuscleGroup
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,7 +24,7 @@ class MuscleGrup
     /**
      * @var Collection<int, Exercise>
      */
-    #[ORM\OneToMany(targetEntity: Exercise::class, mappedBy: 'muscleGrup_id')]
+    #[ORM\OneToMany(targetEntity: Exercise::class, mappedBy: 'muscleGroup_id')]
     private Collection $exercises;
 
     public function __construct()
@@ -80,7 +80,7 @@ class MuscleGrup
     {
         if (!$this->exercises->contains($exercise)) {
             $this->exercises->add($exercise);
-            $exercise->setMuscleGrupId($this);
+            $exercise->setMuscleGroupId($this);
         }
 
         return $this;
@@ -90,8 +90,8 @@ class MuscleGrup
     {
         if ($this->exercises->removeElement($exercise)) {
             // set the owning side to null (unless already changed)
-            if ($exercise->getMuscleGrupId() === $this) {
-                $exercise->setMuscleGrupId(null);
+            if ($exercise->getMuscleGroupId() === $this) {
+                $exercise->setMuscleGroupId(null);
             }
         }
 

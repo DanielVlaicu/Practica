@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\MuscleGrup;
+use App\Entity\MuscleGroup;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<MuscleGrup>
+ * @extends ServiceEntityRepository<MuscleGroup>
  */
-class MuscleGrupRepository extends ServiceEntityRepository
+class MuscleGroupRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MuscleGrup::class);
+        parent::__construct($registry, MuscleGroup::class);
     }
 
     //    /**
-    //     * @return MuscleGrup[] Returns an array of MuscleGrup objects
+    //     * @return MuscleGroup[] Returns an array of MuscleGroup objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class MuscleGrupRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?MuscleGrup
+    //    public function findOneBySomeField($value): ?MuscleGroup
     //    {
     //        return $this->createQueryBuilder('m')
     //            ->andWhere('m.exampleField = :val')

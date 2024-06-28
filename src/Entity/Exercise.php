@@ -21,7 +21,7 @@ class Exercise
 
     #[ORM\ManyToOne(inversedBy: 'exercises')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?MuscleGrup $muscleGrup_id = null;
+    private ?MuscleGroup $MuscleGroup = null;
 
     public function getId(): ?int
     {
@@ -52,14 +52,14 @@ class Exercise
         return $this;
     }
 
-    public function getMuscleGrupId(): ?MuscleGrup
+    public function getMuscleGroupId(): ?MuscleGroup
     {
-        return $this->muscleGrup_id;
+        return $this->muscleGroup_id;
     }
 
-    public function setMuscleGrupId(?MuscleGrup $muscleGrup_id): static
+    public function setMuscleGroupId(?MuscleGroup $muscleGroup_id): static
     {
-        $this->muscleGrup_id = $muscleGrup_id;
+        $this->muscleGroup_id = $muscleGroup_id;
 
         return $this;
     }
