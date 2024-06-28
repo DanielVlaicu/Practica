@@ -36,11 +36,11 @@ class UserController extends AbstractController
             $user = $form->getData();
 
             $userRepository-> saveUser($user);
-            die();
+
 
             // ... perform some action, such as saving the task to the database
 
-            return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('app_user');
         }
 
         return $this->render('user/register.html.twig', [
