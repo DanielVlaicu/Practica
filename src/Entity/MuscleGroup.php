@@ -18,8 +18,7 @@ class MuscleGroup
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $BodyZone = null;
+
 
     /**
      * @var Collection<int, Exercise>
@@ -56,17 +55,7 @@ class MuscleGroup
         return $this;
     }
 
-    public function getBodyZone(): ?string
-    {
-        return $this->BodyZone;
-    }
 
-    public function setBodyZone(string $BodyZone): static
-    {
-        $this->BodyZone = $BodyZone;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Exercise>
