@@ -3,18 +3,11 @@
 {% block title %}Hello MuscleGroupController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
+    <h1>Muscle Groups</h1>
+    <a href="{{ path('muscle-group_create') }}" class="btn btn-primary">Create Muscle Group</a>
     <ul>
-        <li>Your controller at <code>C:/Users/Nick/Desktop/Practica/my_project/src/Controller/MuscleGroupController.php</code></li>
-        <li>Your template at <code>C:/Users/Nick/Desktop/Practica/my_project/templates/muscle_group/index.html.twig</code></li>
+        {% for muscleGroup in muscleGroups %}
+            <li>{{ muscleGroup.name }}</li>
+        {% endfor %}
     </ul>
-</div>
 {% endblock %}

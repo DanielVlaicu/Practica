@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ExerciseController!{% endblock %}
+
+{% block body %}
+    <h1>Exercises</h1>
+    <a href="{{ path('exercise_create') }}" class="btn btn-primary">Create Exercise</a>
+    <ul>
+        {% for exercise in exercises %}
+            <li>{{ exercise.name }} ({{ exercise.type }}) - {{ exercise.muscleGroup.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

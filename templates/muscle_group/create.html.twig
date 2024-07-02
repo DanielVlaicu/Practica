@@ -1,10 +1,15 @@
+{# muscle_group/create.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Create MuscleGroup!{% endblock %}
+{% block title %}Create Muscle Group{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    <h1>Create Muscle Group</h1>
 
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
     {{ form_end(form) }}
 
+    <a href="{{ path('app_muscle_group') }}" class="btn btn-secondary">Back to List</a>
 {% endblock %}
