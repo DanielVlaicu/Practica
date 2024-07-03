@@ -54,36 +54,4 @@ class MuscleGroup
 
         return $this;
     }
-
-
-
-    /**
-     * @return Collection<int, Exercise>
-     */
-    public function getExercises(): Collection
-    {
-        return $this->exercises;
-    }
-
-    public function addExercise(Exercise $exercise): static
-    {
-        if (!$this->exercises->contains($exercise)) {
-            $this->exercises->add($exercise);
-            $exercise->setMuscleGroupId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExercise(Exercise $exercise): static
-    {
-        if ($this->exercises->removeElement($exercise)) {
-            // set the owning side to null (unless already changed)
-            if ($exercise->getMuscleGroupId() === $this) {
-                $exercise->setMuscleGroupId(null);
-            }
-        }
-
-        return $this;
-    }
 }

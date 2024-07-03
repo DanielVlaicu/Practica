@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MuscleGroupType extends AbstractType
 {
@@ -17,11 +19,14 @@ class MuscleGroupType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name',
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255]),
+                ],
             ])
             ->add('button', SubmitType::class, [
                 'label' => 'Add',
             ]);
-
 
     }
 

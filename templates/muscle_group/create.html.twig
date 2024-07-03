@@ -1,4 +1,3 @@
-{# muscle_group/create.html.twig #}
 
 {% extends 'base.html.twig' %}
 
@@ -7,9 +6,18 @@
 {% block body %}
     <h1>Create Muscle Group</h1>
 
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
     {{ form_start(form) }}
     {{ form_row(form.name) }}
+    {{ form_row(form.button) }}
     {{ form_end(form) }}
 
-    <a href="{{ path('app_muscle_group') }}" class="btn btn-secondary">Back to List</a>
+    <a href="{{ path('app_muscle_group') }}" class="btn btn-secondary mt-3">Back to Muscle Groups List</a>
 {% endblock %}
