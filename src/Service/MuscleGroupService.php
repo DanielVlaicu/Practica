@@ -17,20 +17,29 @@ class MuscleGroupService
 
     public function validateAndSaveMuscleGroup(MuscleGroup $muscleGroup): array
     {
-        $existingMuscleGroup = $this->muscleGroupRepository->findOneBy(['name' => $muscleGroup->getName()]);
+        try {
 
-        if ($existingMuscleGroup) {
+            $existingMuscleGroup = $this->muscleGroupRepository->findOneBy(['name' => $muscleGroup->getName()]);
+
+
+            if ($existingMuscleGroup) {
+                throw new \Exception('Muscle group with this name already exists.');
+            }
+
+            $this->muscleGroupRepository->saveMuscleGroup($muscleGroup);
+            return [
+                'success' => true,
+                'message' => 'Muscle group created successfully.'
+            ];
+
+        } catch (\Exception $exeption) {
+
             return [
                 'success' => false,
                 'message' => 'Muscle group with this name already exists.'
             ];
         }
 
-        $this->muscleGroupRepository->saveMuscleGroup($muscleGroup);
 
-        return [
-            'success' => true,
-            'message' => 'Muscle group created successfully.'
-        ];
     }
 }
