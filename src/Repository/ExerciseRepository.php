@@ -22,6 +22,12 @@ class ExerciseRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function delete(Exercise $exercise): void
+    {
+        $this->getEntityManager()->remove($exercise);
+        $this->getEntityManager()->flush();
+    }
+
     //    /**
     //     * @return Exercise[] Returns an array of Exercise objects
     //     */

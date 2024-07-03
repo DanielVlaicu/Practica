@@ -1,13 +1,95 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ExerciseController!{% endblock %}
+{% block title %}Exercises!{% endblock %}
 
 {% block body %}
-    <h1>Exercises</h1>
-    <a href="{{ path('exercise_create') }}" class="btn btn-primary">Create Exercise</a>
-    <ul>
-        {% for exercise in exercises %}
-            <li>{{ exercise.name }} ({{ exercise.type }}) - {{ exercise.muscleGroup.name }}</li>
-        {% endfor %}
-    </ul>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-group button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Exercises</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Muscle group</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for exercise in exercises %}
+                <tr>
+                    <td>{{ exercise.id }}</td>
+                    <td>{{ exercise.name }}</td>
+                    <td>{{ exercise.getMuscleGroup().getName() }}</td>
+                    <td>
+                        <div class="button-group">
+                            <form action="{{ path('edit_exercise', { 'id': exercise.id }) }}">
+                                <button>
+                                    Edit
+                                </button>
+                            </form>
+                            <form action="{{ path('delete_exercise', { 'id': exercise.id }) }}" method="delete">
+                                <button>
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function editExercise(id) {
+            console.log('edit', id);
+        }
+
+        function deleteExercise(id) {
+            console.log('delete', id);
+        }
+    </script>
 {% endblock %}
