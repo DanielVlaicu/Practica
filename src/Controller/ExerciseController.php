@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Exercise;
+use App\Entity\MuscleGroup;
 use App\Form\ExerciseType;
 use App\Repository\ExerciseRepository;
 use App\Service\ExerciseService;
@@ -13,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExerciseController extends AbstractController
 {
+
+
     #[Route('/exercise', name: 'app_exercise')]
     public function index(ExerciseRepository $exerciseRepository): Response
     {
@@ -88,6 +91,7 @@ class ExerciseController extends AbstractController
         return $this->redirectToRoute('app_exercise');
 
     }
+
 
 
 }

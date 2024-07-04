@@ -27,16 +27,19 @@ class ExerciseRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($exercise);
         $this->getEntityManager()->flush();
     }
+
     public function findOneByName(string $name, int $id): ?Exercise
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.name = :name')
             ->andWhere('e.id != :id')
             ->setParameter('name', $name)
-            ->setParameter('id', $id)
+           ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+
 
     //    /**
     //     * @return Exercise[] Returns an array of Exercise objects

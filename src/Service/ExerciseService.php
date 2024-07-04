@@ -57,11 +57,11 @@ class ExerciseService
     {
         try {
 
-            $existingExercise = $this->exerciseRepository->findOneByName($exercise->getName(),$exercise->getId());
+            $existingExercise = $this->exerciseRepository->findOneByName($exercise->getName(), $exercise->getId());
 
 
             if (!$existingExercise) {
-                throw new \Exception('Exercise with this name is not exists.');
+                throw new \Exception('Exercise with this name already exists.');
             }
 
             $this->exerciseRepository->saveExercise($exercise);
@@ -82,6 +82,12 @@ class ExerciseService
     public function deleteExercise(Exercise $exercise): void
     {
         $this->exerciseRepository->delete($exercise);
+    }
+
+
+    public function getExercisesByMuscleGroup(string $muscleGroupName): array
+    {
+        return $this->exerciseRepository->findByMuscleGroup($muscleGroupName);
     }
 
 }

@@ -23,6 +23,16 @@ class MuscleGroupRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
+    public function findByMuscleGroup(string $muscleGroupName): array
+    {
+        return $this->createQueryBuilder('m')
+            ->leftJoin('m.exercises', 'e')
+            ->where('m.name = :name')
+            ->setParameter('name', $muscleGroupName)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return MuscleGroup[] Returns an array of MuscleGroup objects
     //     */

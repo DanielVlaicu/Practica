@@ -8,7 +8,8 @@ use App\Repository\MuscleGroupRepository;
 
 class MuscleGroupService
 {
-    private $muscleGroupRepository;
+    private MuscleGroupRepository $muscleGroupRepository;
+
 
     public function __construct(MuscleGroupRepository $muscleGroupRepository)
     {
@@ -42,4 +43,10 @@ class MuscleGroupService
 
 
     }
+
+    public function getExercisesByMuscleGroup(string $muscleGroupName): array
+    {
+        return $this->muscleGroupRepository->findByMuscleGroup($muscleGroupName);
+    }
+
 }

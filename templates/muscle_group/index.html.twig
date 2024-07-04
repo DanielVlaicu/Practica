@@ -7,7 +7,10 @@
     <a href="{{ path('muscle-group_create') }}" class="btn btn-primary">Create Muscle Group</a>
     <ul>
         {% for muscleGroup in muscleGroups %}
-            <li>{{ muscleGroup.name }}</li>
+            <li>
+                {{ muscleGroup.name }}
+                <a href="{{ path('muscle_group_exercises', {'id': muscleGroup.id}) }}" class="btn btn-secondary">View Exercises</a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

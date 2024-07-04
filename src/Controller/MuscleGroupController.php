@@ -8,6 +8,7 @@ use App\Form\MuscleGroupType;
 use App\Form\UserType;
 use App\Repository\MuscleGroupRepository;
 use App\Repository\UserRepository;
+use App\Service\ExerciseService;
 use App\Service\MuscleGroupService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,10 +21,13 @@ class MuscleGroupController extends AbstractController
 {
 
     private EntityManagerInterface $entityManager;
+    private MuscleGroupService $muscleGroupService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager,MuscleGroupService $muscleGroupService)
     {
         $this->entityManager = $entityManager;
+        $this->muscleGroupService = $muscleGroupService;
+
     }
 
     #[Route('/muscle-group', name: 'app_muscle_group')]
@@ -68,14 +72,17 @@ class MuscleGroupController extends AbstractController
         ]);
     }
 
-    #[Route('/muscle-group/exercises', name: 'muscle_group_exercises')]
+    #[Route('/muscle-group/{id}/exercises', name: 'muscle_group_exercises')]
     public function muscleGroupExercises(MuscleGroup $muscleGroup): Response
     {
-        $exercises = $muscleGroup->getExercises();
+        $exercises = $this->muscleGroupService->getExercisesByMuscleGroup($muscleGroup->getName());
 
-        return $this->render('exercise/tabel.html.twig', [
+        return $this->render('muscle_group/tabel.html.twig', [
             'muscleGroup' => $muscleGroup,
             'exercises' => $exercises,
         ]);
     }
+
+
+
 }
