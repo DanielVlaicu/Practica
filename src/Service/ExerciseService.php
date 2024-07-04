@@ -8,12 +8,13 @@ use App\Repository\ExerciseRepository;
 class ExerciseService
 {
 
-    public  function __construct(private readonly ExerciseRepository $exerciseRepository)
+
+    public function __construct(private readonly ExerciseRepository $exerciseRepository)
     {
 
     }
 
-    public function getExerciseById($exerciseId):object
+    public function getExerciseById($exerciseId): object
     {
         return $this->exerciseRepository->find($exerciseId);
     }
@@ -56,7 +57,7 @@ class ExerciseService
     {
         try {
 
-            $existingExercise = $this->exerciseRepository->findOneBy(['name' => $exercise->getName()]);
+            $existingExercise = $this->exerciseRepository->findOneByName($exercise->getName(),$exercise->getId());
 
 
             if (!$existingExercise) {
@@ -78,9 +79,9 @@ class ExerciseService
         }
     }
 
-    public function deleteExercise(Exercise $exercise):void
+    public function deleteExercise(Exercise $exercise): void
     {
-        $existingExercise->@this->exerciseRepository-> delete();
+        $this->exerciseRepository->delete($exercise);
     }
 
 }

@@ -67,4 +67,15 @@ class MuscleGroupController extends AbstractController
             'muscleGroups' => $muscleGroups,
         ]);
     }
+
+    #[Route('/muscle-group/exercises', name: 'muscle_group_exercises')]
+    public function muscleGroupExercises(MuscleGroup $muscleGroup): Response
+    {
+        $exercises = $muscleGroup->getExercises();
+
+        return $this->render('exercise/tabel.html.twig', [
+            'muscleGroup' => $muscleGroup,
+            'exercises' => $exercises,
+        ]);
+    }
 }

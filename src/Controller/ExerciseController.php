@@ -49,11 +49,16 @@ class ExerciseController extends AbstractController
         ]);
     }
 
-    #[Route('/exercise/{id}', name: 'edit_exercise', methods: ['GET','PUT'])]
+    #[Route('/exercise/{id}', name: 'edit_exercise',methods: ['GET','POST'])]
     public function update(Request $request, ExerciseService $exerciseService, $id)
     {
 
         $exercise = $exerciseService->getExerciseById($id);
+
+        if (!$exercise) {
+            throw $this->createNotFoundException('Exercise not found');
+        }
+
         $form = $this->createForm(ExerciseType::class, $exercise);
 
         $form->handleRequest($request);
@@ -70,9 +75,18 @@ class ExerciseController extends AbstractController
     }
 
     #[Route('/exercise/{id}', name: 'delete_exercise', methods: ['DELETE'])]
-    public function destroy(Request $request, ExerciseService $exerciseService): void
+    public function destroy(Request $request, ExerciseService $exerciseService,$id): \Symfony\Component\HttpFoundation\RedirectResponse
     {
-        dd($request);
+        $exercise = $exerciseService->getExerciseById($id);
+
+        if (!$exercise) {
+            throw $this->createNotFoundException('The exercise does not exist');
+        }
+
+        $exerciseService->deleteExercise($exercise);
+        $this->addFlash('success', 'Exercise deleted successfully');
+        return $this->redirectToRoute('app_exercise');
+
     }
 
 
