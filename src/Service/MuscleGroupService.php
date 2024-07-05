@@ -44,9 +44,6 @@ class MuscleGroupService
 
     }
 
-    public function getExercisesByMuscleGroup(string $muscleGroupName): array
-    {
-        return $this->muscleGroupRepository->findByMuscleGroup($muscleGroupName);
-    }
+
 
 }

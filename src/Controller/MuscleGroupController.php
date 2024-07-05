@@ -72,16 +72,6 @@ class MuscleGroupController extends AbstractController
         ]);
     }
 
-    #[Route('/muscle-group/{id}/exercises', name: 'muscle_group_exercises')]
-    public function muscleGroupExercises(MuscleGroup $muscleGroup): Response
-    {
-        $exercises = $this->muscleGroupService->getExercisesByMuscleGroup($muscleGroup->getName());
-
-        return $this->render('muscle_group/tabel.html.twig', [
-            'muscleGroup' => $muscleGroup,
-            'exercises' => $exercises,
-        ]);
-    }
 
 
 

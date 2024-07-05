@@ -92,6 +92,15 @@ class ExerciseController extends AbstractController
 
     }
 
+    #[Route('/muscle-group/{muscleGroupName}', name: 'exercises_by_muscle_group')]
+    public function exercisesByMuscleGroup(string $muscleGroupName, ExerciseRepository $exerciseRepository): Response
+    {
+        $exercises = $exerciseRepository->findByMuscleGroup($muscleGroupName);
 
+        return $this->render('exercise/exercises_by_muscle_group.html.twig', [
+            'muscleGroupName' => $muscleGroupName,
+            'exercises' => $exercises,
+        ]);
+    }
 
 }

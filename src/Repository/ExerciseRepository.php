@@ -39,7 +39,15 @@ class ExerciseRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-
+    public function findByMuscleGroup(string $muscleGroupName): array
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('e.muscleGroup', 'm')
+            ->where('m.name = :name')
+            ->setParameter('name', $muscleGroupName)
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Exercise[] Returns an array of Exercise objects

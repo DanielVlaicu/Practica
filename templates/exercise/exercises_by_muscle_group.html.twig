@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Exercises for {{ muscleGroupName }}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .exercise-list {
+            margin-top: 20px;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .list-group-item strong {
+            font-size: 1.2em;
+            display: block;
+        }
+
+        .list-group-item p {
+            margin: 5px 0 0;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Exercises for {{ muscleGroupName }}</h1>
+
+    <div class="exercise-list">
+        {% if exercises is empty %}
+            <p>No exercises found for {{ muscleGroupName }}</p>
+        {% else %}
+            <ul class="list-group">
+                {% for exercise in exercises %}
+                    <li class="list-group-item">
+                        <strong>{{ exercise.getName() }}</strong>
+                        <p>Type: {{ exercise.getType() }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}
