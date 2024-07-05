@@ -60,7 +60,7 @@ class ExerciseService
             $existingExercise = $this->exerciseRepository->findOneByName($exercise->getName(), $exercise->getId());
 
 
-            if (!$existingExercise) {
+            if ($existingExercise) {
                 throw new \Exception('Exercise with this name already exists.');
             }
 

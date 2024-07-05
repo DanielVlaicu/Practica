@@ -54,41 +54,27 @@
 
 {% block body %}
     <div class="example-wrapper">
-        <h1>Exercises</h1>
+        <h1>Workout</h1>
 
         <table>
             <thead>
             <tr>
                 <th>Index</th>
                 <th>Name</th>
-                <th>Muscle group</th>
-                <th>Actions</th>
+                <th>Performed At</th>
             </tr>
             </thead>
             <tbody>
-            {% for exercise in exercises %}
+            {% for workout in workouts %}
                 <tr>
-                    <td>{{ exercise.id }}</td>
-                    <td>{{ exercise.name }}</td>
-                    <td>{{ exercise.getMuscleGroup().getName() }}</td>
-                    <td>
-                        <div class="button-group">
-                            <form action="{{ path('edit_exercise', { 'id': exercise.id }) }}">
-                                <button type="submit">
-                                    Edit
-                                </button>
-                            </form>
-                            <form action="{{ path('delete_exercise', { 'id': exercise.id }) }}">
-                                <button type="submit">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                    <td>{{ workout.id }}</td>
+                    <td>{{ workout.name }}</td>
+                    <td>{{ workout.createdAt|date("m/d/Y h:m")}}</td>
+
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">No records found</td>
+                    <td colspan="3">No records found</td>
                 </tr>
             {% endfor %}
             </tbody>

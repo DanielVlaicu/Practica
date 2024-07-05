@@ -52,7 +52,7 @@ class ExerciseController extends AbstractController
         ]);
     }
 
-    #[Route('/exercise/{id}', name: 'edit_exercise',methods: ['GET','POST'])]
+    #[Route('/exercise/{id}', name: 'edit_exercise', methods: ['GET', 'POST'])]
     public function update(Request $request, ExerciseService $exerciseService, $id)
     {
 
@@ -67,9 +67,18 @@ class ExerciseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Exercise $exercise */
             $exercise = $form->getData();
 
-            $exerciseService->validateAndUpdateExercise($exercise);
+
+            $status = $exerciseService->validateAndUpdateExercise($exercise);
+            if (!$status['success']) {
+
+                $this->addFlash('error', 'This Exercise already exists.');
+
+                return $this->redirectToRoute('edit_exercise',['id'=>$exercise->getId()]);
+
+            }
         }
 
         return $this->render('exercise/create.html.twig', [
@@ -77,9 +86,10 @@ class ExerciseController extends AbstractController
         ]);
     }
 
-    #[Route('/exercise/{id}', name: 'delete_exercise', methods: ['DELETE'])]
-    public function destroy(Request $request, ExerciseService $exerciseService,$id): \Symfony\Component\HttpFoundation\RedirectResponse
+    #[Route('/exercise/{id}/delete', name: 'delete_exercise')]
+    public function destroy(Request $request, ExerciseService $exerciseService, $id): Response
     {
+
         $exercise = $exerciseService->getExerciseById($id);
 
         if (!$exercise) {
