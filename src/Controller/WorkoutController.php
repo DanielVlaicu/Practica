@@ -69,4 +69,18 @@ class WorkoutController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/workout/{id}', name: 'app_workout_details')]
+    public function show(WorkoutRepository $workoutRepository, int $id): Response
+    {
+
+
+        $workout = $workoutRepository->find($id);
+
+        return $this->render('workout/show.html.twig', [
+            'controller_name' => 'WorkoutController',
+            'workout' => $workout,
+        ]);
+    }
+
 }

@@ -38,6 +38,8 @@
             <tr>
                 <th>ID</th>
                 <th>Email</th>
+                <th>Action</th>>
+
             </tr>
             </thead>
             <tbody>
@@ -45,6 +47,16 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
+                    <td>
+                    <div class="btn-group" role="group">
+                        <form action="{{ path('list_user_details', { 'id': user.id }) }}" method="GET">
+                            <button type="submit" class="btn btn-primary">
+                                Show
+                            </button>
+                        </form>
+                    </div>
+                    </td>
+
                 </tr>
             {% else %}
                 <tr>

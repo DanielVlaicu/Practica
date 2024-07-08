@@ -35,30 +35,46 @@
 
 {% block body %}
     <div class="example-wrapper">
-        <h1>Workout</h1>
+        <h1>Exercise for {{ workout.name }} </h1>
 
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
+
+
                 <th scope="col">Index</th>
                 <th scope="col">Name</th>
-                <th scope="col">Performed At</th>
-                <th scope="col">Action</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Reps</th>
+                <th scope="col">Sets</th>
+
             </tr>
             </thead>
             <tbody>
-            {% for workout in workouts %}
+
+
+            {% for exerciseLog in workout.exerciseLogs %}
+
                 <tr>
-                    <td>{{ workout.id }}</td>
-                    <td>{{ workout.name }}</td>
-                    <td>{{ workout.createdAt|date("m/d/Y h:m")}}</td>
+                    <td>{{ exerciseLog.id }}</td>
+                    <td>{{ exerciseLog.exercise.name }}</td>
+                    <td>{{ exerciseLog.duration }}</td>
+                    <td>{{ exerciseLog.reps }}</td>
+                    <td>{{ exerciseLog.sets }}</td>
+
+
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">No records found</td>
+                    <td colspan="5">No records found</td>
                 </tr>
+
+
             {% endfor %}
+
             </tbody>
         </table>
+
+
     </div>
 {% endblock %}
