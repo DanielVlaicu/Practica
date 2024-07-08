@@ -32,6 +32,7 @@ class WorkoutController extends AbstractController
     #[Route('/workout/create', name: 'workout_create')]
     public function store(Request $request, WorkoutService $workoutService): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $workout = new Workout();
         $form = $this->createForm(WorkoutType::class, $workout);
         $form->handleRequest($request);

@@ -3,61 +3,16 @@
 {% block title %}Exercises!{% endblock %}
 
 {% block stylesheets %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
-
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #dee2e6;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .button-group button {
-            padding: 8px 16px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .button-group button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 {% endblock %}
 
 {% block body %}
-    <div class="example-wrapper">
+    <div class="container">
         <h1>Exercises</h1>
 
-        <table>
-            <thead>
+        <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
             <tr>
                 <th>Index</th>
                 <th>Name</th>
@@ -72,14 +27,14 @@
                     <td>{{ exercise.name }}</td>
                     <td>{{ exercise.getMuscleGroup().getName() }}</td>
                     <td>
-                        <div class="button-group">
-                            <form action="{{ path('edit_exercise', { 'id': exercise.id }) }}">
-                                <button type="submit">
+                        <div class="btn-group" role="group">
+                            <form action="{{ path('edit_exercise', { 'id': exercise.id }) }}" method="GET">
+                                <button type="submit" class="btn btn-primary">
                                     Edit
                                 </button>
                             </form>
-                            <form action="{{ path('delete_exercise', { 'id': exercise.id }) }}">
-                                <button type="submit">
+                            <form action="{{ path('delete_exercise', { 'id': exercise.id }) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">
                                     Delete
                                 </button>
                             </form>

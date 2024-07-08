@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create workout{% endblock %}
+{% block title %}Create Workout{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .exerciseLogs {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .exerciseLogs li {
+            margin-bottom: 15px;
+        }
+
+        .exercise-log-item {
+            background-color: #f8f9fa; /* Example of a custom background color */
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .add_item_link, .remove_item_link {
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
+    <div class="container mt-5">
+        <h1>Create Workout</h1>
+        {{ form_start(form) }}
 
-    <ul class="exerciseLogs"
-        data-index="{{ form.exerciseLogs|length > 0 ? form.exerciseLogs|last.vars.name + 1 : 0 }}"
-        data-prototype="{{ form_widget(form.exerciseLogs.vars.prototype)|e('html_attr') }}"
-    >
-        {% for exerciseLog in form.exerciseLogs %}
-            <li>{{ form_row(exerciseLog) }}</li>
-        {% endfor %}
-    </ul>
-    <button type="button" class="add_item_link" data-collection-holder-class="exerciseLogs">Add a exercise log</button>
-    {{ form_end(form) }}
+        <ul class="exerciseLogs"
+            data-index="{{ form.exerciseLogs|length > 0 ? form.exerciseLogs|last.vars.name + 1 : 0 }}"
+            data-prototype="{{ form_widget(form.exerciseLogs.vars.prototype)|e('html_attr') }}"
+        >
+            {% for exerciseLog in form.exerciseLogs %}
+                <li class="exercise-log-item">
+                    {{ form_row(exerciseLog) }}
+                    <button type="button" class="btn btn-danger remove_item_link">Remove this Exercise Log</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="exerciseLogs">Add a Exercise Log</button>
+        {{ form_end(form) }}
+    </div>
 
     <script>
         document
@@ -27,6 +59,7 @@
             const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
             const item = document.createElement('li');
+            item.classList.add('exercise-log-item'); // Add custom class for styling
 
             item.innerHTML = collectionHolder
                 .dataset
@@ -43,6 +76,7 @@
             // add remove button
             const removeFormButton = document.createElement('button');
             removeFormButton.innerText = 'Remove this Exercise Log';
+            removeFormButton.classList.add('btn', 'btn-danger', 'remove_item_link');
 
             item.append(removeFormButton);
 
@@ -52,6 +86,15 @@
                 item.remove();
             });
         }
-    </script>
 
+        // Add remove button to existing exercise logs
+        document
+            .querySelectorAll('.remove_item_link')
+            .forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    btn.closest('li').remove();
+                });
+            });
+    </script>
 {% endblock %}

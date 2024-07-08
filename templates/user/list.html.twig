@@ -2,7 +2,9 @@
 
 {% block title %}User List{% endblock %}
 
-{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
         .user-table {
             margin: 1em auto;
@@ -26,14 +28,15 @@
             background-color: #f2f2f2;
         }
     </style>
+{% endblock %}
 
-    <div class="user-table">
+{% block body %}
+    <div class="container user-table">
         <h1>User List</h1>
-        <table>
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
             <tr>
                 <th>ID</th>
-
                 <th>Email</th>
             </tr>
             </thead>
@@ -41,12 +44,11 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
-
                     <td>{{ user.email }}</td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="3">No users found</td>
+                    <td colspan="2">No users found</td>
                 </tr>
             {% endfor %}
             </tbody>

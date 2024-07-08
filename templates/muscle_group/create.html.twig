@@ -1,23 +1,33 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Create Muscle Group{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+{% endblock %}
+
 {% block body %}
-    <h1>Create Muscle Group</h1>
+    <div class="container">
+        <h1>Create Muscle Group</h1>
 
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-danger">{{ message }}</div>
-    {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
 
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.button) }}
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.button, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
 
-    <a href="{{ path('app_muscle_group') }}" class="btn btn-secondary mt-3">Back to Muscle Groups List</a>
+        <a href="{{ path('app_muscle_group') }}" class="btn btn-secondary mt-3">Back to Muscle Groups List</a>
+    </div>
 {% endblock %}

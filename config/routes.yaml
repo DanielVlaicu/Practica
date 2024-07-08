@@ -1,9 +1,55 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+
+
+app_user:
+  path: /user
+  controller: App\Controller\UserController::index
+
+register_user:
+  path: /user/register
+  controller: App\Controller\UserController::store
+
+list_users:
+  path: /users
+  controller: App\Controller\UserController::list
+
+app_workout:
+  path: /workout
+  controller: App\Controller\WorkoutController::index
+
+workout_create:
+  path: /workout/create
+  controller: App\Controller\WorkoutController::store
+
+app_exercise:
+  path: /exercise
+  controller: App\Controller\ExerciseController::index
+
+exercise_create:
+  path: /exercise/create
+  controller: App\Controller\ExerciseController::store
+
+edit_exercise:
+  path: /exercise/{id}
+  controller: App\Controller\ExerciseController::update
+  methods: ['GET', 'POST']
+
+delete_exercise:
+  path: /exercise/{id}/delete
+  controller: App\Controller\ExerciseController::destroy
+
+app_muscle_group:
+  path: /muscle-group
+  controller: App\Controller\MuscleGroupController::index
+
+muscle-group_create:
+  path: /muscle-group/create
+  controller: App\Controller\MuscleGroupController::store
 
 exercises_by_muscle_group:
-    path: '/muscle-group/{muscleGroupName}'
-    controller: 'App\Controller\ExerciseController::exercisesByMuscleGroup'
+  path: /muscle-group/{muscleGroupName}
+  controller: App\Controller\ExerciseController::exercisesByMuscleGroup
