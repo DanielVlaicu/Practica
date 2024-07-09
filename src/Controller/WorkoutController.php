@@ -70,16 +70,16 @@ class WorkoutController extends AbstractController
         ]);
     }
 
-//    #[Route('/workout/{id}', name: 'app_workout_details')]
-//    public function show(WorkoutRepository $workoutRepository, $id): Response
-//    {
-//
-//
-//        $workout = $workoutRepository->find($id);
-//
-//        return $this->render('workout/show.html.twig', [
-//            'controller_name' => 'WorkoutController',
-//            'workout' => $workout,
-//        ]);
-//    }
+    #[Route('/workout/{id}', name: 'app_workout_details')]
+    public function show(WorkoutRepository $workoutRepository, $id): Response
+    {
+
+
+        $workout = $workoutRepository->find($id);
+
+        return $this->render('workout/show.html.twig', [
+            'controller_name' => 'WorkoutController',
+            'workout' => $workout,
+        ]);
+    }
 }

@@ -3,16 +3,28 @@
 {% block title %}Create Exercise{% endblock %}
 
 {% block body %}
-    <h1>Create Exercise</h1>
+    <div class="container">
+        <h1>Create Exercise</h1>
 
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-danger">{{ message }}</div>
-    {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
 
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.type) }}
-    {{ form_row(form.muscleGroup) }}
-    {{ form_row(form.button) }}
-    {{ form_end(form) }}
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.type, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.muscleGroup, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.button, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
+
+        <a href="{{ path('app_exercise') }}" class="btn btn-secondary mt-3">Back to Exercises List</a>
+    </div>
 {% endblock %}
