@@ -23,7 +23,7 @@ class MuscleGroupController extends AbstractController
     private EntityManagerInterface $entityManager;
     private MuscleGroupService $muscleGroupService;
 
-    public function __construct(EntityManagerInterface $entityManager,MuscleGroupService $muscleGroupService)
+    public function __construct(EntityManagerInterface $entityManager, MuscleGroupService $muscleGroupService)
     {
         $this->entityManager = $entityManager;
         $this->muscleGroupService = $muscleGroupService;
@@ -73,6 +73,20 @@ class MuscleGroupController extends AbstractController
     }
 
 
+    #[Route('/muscle-group/{id}/delete', name: 'delete_muscle_group', methods: ['POST'])]
+    public function destroy(Request $request, MuscleGroupService $muscleGroupService, $id): Response
+    {
+        $muscleGroup = $muscleGroupService->getMuscleGroupById($id);
 
+        if (!$muscleGroup) {
+            throw $this->createNotFoundException('The muscle group does not exist');
+        }
+
+
+        $muscleGroupService->deleteMuscleGroupWithExercises($muscleGroup);
+        $this->addFlash('success', 'Muscle Group deleted successfully');
+
+        return $this->redirectToRoute('app_muscle_group');
+    }
 
 }

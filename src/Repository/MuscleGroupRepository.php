@@ -23,7 +23,11 @@ class MuscleGroupRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-
+    public function delete(MuscleGroup $muscleGroup): void
+    {
+        $this->getEntityManager()->remove($muscleGroup);
+        $this->getEntityManager()->flush();
+    }
 
     //    /**
     //     * @return MuscleGroup[] Returns an array of MuscleGroup objects
