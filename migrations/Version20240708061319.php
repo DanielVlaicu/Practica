@@ -20,14 +20,14 @@ final class Version20240708061319 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-//        $this->addSql('ALTER TABLE exercise RENAME INDEX idx_aedad51c84e0483b TO IDX_AEDAD51C44004D0');
-        $this->addSql('ALTER TABLE user ADD name VARCHAR(255) NOT NULL');
+    //  $this->addSql('ALTER TABLE exercise RENAME INDEX idx_aedad51c84e0483b TO IDX_AEDAD51C44004D0');
+       $this->addSql('ALTER TABLE user ADD name VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-//        $this->addSql('ALTER TABLE exercise RENAME INDEX idx_aedad51c44004d0 TO IDX_AEDAD51C84E0483B');
+      // $this->addSql('ALTER TABLE exercise RENAME INDEX idx_aedad51c44004d0 TO IDX_AEDAD51C84E0483B');
         $this->addSql('ALTER TABLE `user` DROP name');
     }
 }

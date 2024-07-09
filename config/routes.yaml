@@ -4,6 +4,13 @@ controllers:
     namespace: App\Controller
   type: attribute
 
+app_login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+
+app_logout:
+  path: /logout
+  controller: App\Controller\SecurityController::logout
 
 app_user:
   path: /user
@@ -36,7 +43,7 @@ exercise_create:
 edit_exercise:
   path: /exercise/{id}
   controller: App\Controller\ExerciseController::update
-  methods: ['GET', 'POST']
+  methods: [ 'GET', 'POST' ]
 
 delete_exercise:
   path: /exercise/{id}/delete
