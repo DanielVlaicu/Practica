@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workouts for Trainers{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Workouts for Clients </h1>
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Client</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for workout in workouts %}
+                <tr>
+                    <td>{{ workout.id }}</td>
+                    <td>{{ workout.name }}</td>
+                    <td>{{ workout.createdAt|date("m/d/Y H:i") }}</td>
+                    <td>{{ workout.person.name }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -37,6 +37,16 @@ class WorkoutRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllWithUser(): array
+    {
+        return $this->createQueryBuilder('w')
+            ->leftJoin('w.person', 'u')
+            ->addSelect('u')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    public function findOneBySomeField($value): ?Workout
     //    {
     //        return $this->createQueryBuilder('w')

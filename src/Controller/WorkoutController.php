@@ -29,6 +29,16 @@ class WorkoutController extends AbstractController
         ]);
     }
 
+    #[Route('/workouts/trainer', name: 'app_workout_trainer')]
+    public function indexTrainer(WorkoutRepository $workoutRepository): Response
+    {
+        $workouts = $workoutRepository->findAllWithUser();
+
+        return $this->render('workout/indexTrainer.html.twig', [
+            'workouts' => $workouts,
+        ]);
+    }
+
     #[Route('/workout/create', name: 'workout_create')]
     public function store(Request $request, WorkoutService $workoutService): Response
     {
@@ -57,8 +67,8 @@ class WorkoutController extends AbstractController
 
 //            if (isset($status['error']) && $status['error']) {
 //                $this->addFlash('error', 'This Workout already exists.');
-//                return $this->redirectToRoute('workout_create');
-//            }
+////                return $this->redirectToRoute('workout_create');
+////            }
 
             return $this->redirectToRoute('app_workout');
 
@@ -70,16 +80,16 @@ class WorkoutController extends AbstractController
         ]);
     }
 
-    #[Route('/workout/{id}', name: 'app_workout_details')]
-    public function show(WorkoutRepository $workoutRepository, $id): Response
-    {
-
-
-        $workout = $workoutRepository->find($id);
-
-        return $this->render('workout/show.html.twig', [
-            'controller_name' => 'WorkoutController',
-            'workout' => $workout,
-        ]);
-    }
+//    #[Route('/workout/{id}', name: 'app_workout_details')]
+//    public function show(WorkoutRepository $workoutRepository, $id): Response
+//    {
+//
+//
+//        $workout = $workoutRepository->find($id);
+//
+//        return $this->render('workout/show.html.twig', [
+//            'controller_name' => 'WorkoutController',
+//            'workout' => $workout,
+//        ]);
+//    }
 }

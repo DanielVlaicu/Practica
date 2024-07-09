@@ -15,7 +15,7 @@
         }
 
         .exercise-log-item {
-            background-color: #f8f9fa; /* Example of a custom background color */
+            background-color: #f8f9fa;
             border: 1px solid #dee2e6;
             padding: 15px;
             border-radius: 4px;
@@ -59,7 +59,7 @@
             const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
             const item = document.createElement('li');
-            item.classList.add('exercise-log-item'); // Add custom class for styling
+            item.classList.add('exercise-log-item');
 
             item.innerHTML = collectionHolder
                 .dataset
@@ -73,7 +73,7 @@
 
             collectionHolder.dataset.index++;
 
-            // add remove button
+
             const removeFormButton = document.createElement('button');
             removeFormButton.innerText = 'Remove this Exercise Log';
             removeFormButton.classList.add('btn', 'btn-danger', 'remove_item_link');
@@ -82,12 +82,12 @@
 
             removeFormButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                // remove the li for the exerciseLog form
+
                 item.remove();
             });
         }
 
-        // Add remove button to existing exercise logs
+
         document
             .querySelectorAll('.remove_item_link')
             .forEach(btn => {

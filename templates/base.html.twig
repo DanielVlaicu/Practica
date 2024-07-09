@@ -9,19 +9,21 @@
     {% block stylesheets %}
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     {% endblock %}
     <style>
         .btn-primary {
             background-color: #a6ce65;
             border-color: #a6ce65;
         }
+
         .btn-secondary {
             background-color: #59319a;
             border-color: #59319a;
         }
-        .btn-danger{
+
+        .btn-danger {
             background-color: #FF6D60;
             border-color: #FF6D60;
         }
@@ -30,58 +32,66 @@
 <body>
 {% if app.user %}
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #a6ce65;">
-    <a class="navbar-brand" href="#">
-        <img src="{{ asset('../assets/img/logo.jpg') }}" width="35" height="35" class="d-inline-block align-top"
-             alt="Logo">
-        Muscle IT
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('workout_create') }}">Create Workout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_workout') }}">Workouts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_exercise') }}">Exercises</a>
-            </li>
-            {% if is_granted('ROLE_TRAINER') %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('exercise_create') }}">Create Exercise</a>
-            </li>
-            {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_muscle_group') }}">Muscle Groups</a>
-            </li>
-            {% if is_granted('ROLE_TRAINER') %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('muscle-group_create') }}">Create Muscle Group</a>
-            </li>
-            {% endif %}
-            {% if is_granted('ROLE_TRAINER') %}
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('../assets/img/logo.png') }}" width="35" height="35" class="d-inline-block align-top"
+                 alt="Logo">
+            Muscle IT
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('list_users') }}">Users</a>
+                    <a class="nav-link" href="{{ path('app_workout') }}">Workouts</a>
                 </li>
-            {% endif %}
-        </ul>
+                {% endif %}
 
-        <ul class="navbar-nav ml-auto">
-            {% if app.user %}
+                {% if is_granted('ROLE_TRAINER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_workout_trainer') }}">Workouts</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" disabled="true">{{ app.user.name }}</a>
+                    <a class="nav-link" href="{{ path('workout_create') }}">Create Workout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    <a class="nav-link" href="{{ path('app_exercise') }}">Exercises</a>
                 </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+                {% if is_granted('ROLE_TRAINER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('exercise_create') }}">Create Exercise</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_muscle_group') }}">Muscle Groups</a>
+                </li>
+                {% if is_granted('ROLE_TRAINER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('muscle-group_create') }}">Create Muscle Group</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_TRAINER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('list_users') }}">Users</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" disabled="true">{{ app.user.name }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 {% endif %}
 
 <div class="container mt-4">
