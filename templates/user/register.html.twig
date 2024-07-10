@@ -1,9 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}register user!{% endblock %}
+{% block title %}Register user{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .register-form {
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+        .register-form .form-group {
+            margin-bottom: 15px;
+        }
+        .register-form .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .register-form .form-control:focus {
+            z-index: 2;
+        }
+        .register-form input[type="text"],
+        .register-form input[type="email"],
+        .register-form input[type="password"] {
+            margin-bottom: 10px;
+        }
+        .register-form .btn-register {
+            margin-top: 10px;
+            background-color: #a6ce65;
+            border-color: #a6ce65;
+        }
+        .register-form .btn-register:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-   {{form_start(form)}}
-    {{form_end(form) }}
+    <div class="container">
+        <form class="register-form" method="post">
+            {{ form_start(form) }}
 
+            <div class="form-group">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Enter your email'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Enter your password'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter your name'}}) }}
+            </div>
+
+          <button class="btn btn-lg btn-primary btn-block btn-register" type="submit">Register</button>
+
+            {{ form_end(form) }}
+        </form>
+    </div>
 {% endblock %}
