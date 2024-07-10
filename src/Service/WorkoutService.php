@@ -32,4 +32,9 @@ class WorkoutService
 
 
     }
+
+    public function getAllWorkoutWithUser()
+    {
+        return $this->workoutRepository->findAllWithUser();
+    }
 }

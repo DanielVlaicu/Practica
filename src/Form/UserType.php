@@ -30,9 +30,7 @@ class UserType extends AbstractType
                 'label' => 'Name',
                 'required' => true,
             ])
-            ->add('button',SubmitType::class,[
-                'label'=>'register',
-            ])
+
 
         ;
     }

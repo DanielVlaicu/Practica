@@ -45,7 +45,7 @@ class UserController extends AbstractController
 
             // ... perform some action, such as saving the task to the database
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('user/register.html.twig', [
@@ -64,17 +64,17 @@ class UserController extends AbstractController
         ]);
     }
 
-//    #[Route('/user/{id}', name: 'list_user_details')]
-//    public function userDetails(UserRepository $userRepository, string $id): Response
-//    {
-//        $id = (int)$id;
-//        $user = $userRepository->find($id);
-//        return $this->render('user/show.html.twig', [
-//            'user' => $user
-//
-//        ]);
-//
-//
-//    }
+    #[Route('/user/details/{id}', name: 'list_user_details')]
+    public function userDetails(UserRepository $userRepository, string $id): Response
+    {
+        $id = (int)$id;
+        $user = $userRepository->find($id);
+        return $this->render('user/show.html.twig', [
+            'user' => $user
+
+        ]);
+
+
+    }
 
 }

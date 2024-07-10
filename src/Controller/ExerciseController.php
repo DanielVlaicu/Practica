@@ -52,7 +52,7 @@ class ExerciseController extends AbstractController
         ]);
     }
 
-    #[Route('/exercise/{id}', name: 'edit_exercise', methods: ['GET', 'POST'])]
+    #[Route('/exercise/update/{id}', name: 'edit_exercise', methods: ['GET', 'POST'])]
     public function update(Request $request, ExerciseService $exerciseService, $id)
     {
 

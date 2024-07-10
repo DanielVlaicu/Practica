@@ -41,7 +41,7 @@ exercise_create:
   controller: App\Controller\ExerciseController::store
 
 edit_exercise:
-  path: /exercise/{id}
+  path: /exercise/update/{id}
   controller: App\Controller\ExerciseController::update
   methods: [ 'GET', 'POST' ]
 

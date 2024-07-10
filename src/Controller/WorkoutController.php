@@ -20,7 +20,13 @@ class WorkoutController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
+        if(in_array('ROLE_TRAINER', $user->getRoles())){
+            $workouts = $workoutService->getAllWorkoutWithUser();
 
+            return $this->render('workout/indexTrainer.html.twig', [
+                'workouts' => $workouts,
+            ]);
+        }
         $workouts = $workoutService->findWorkoutsByUser($user);
 
         return $this->render('workout/index.html.twig', [
@@ -29,15 +35,15 @@ class WorkoutController extends AbstractController
         ]);
     }
 
-    #[Route('/workouts/trainer', name: 'app_workout_trainer')]
-    public function indexTrainer(WorkoutRepository $workoutRepository): Response
-    {
-        $workouts = $workoutRepository->findAllWithUser();
-
-        return $this->render('workout/indexTrainer.html.twig', [
-            'workouts' => $workouts,
-        ]);
-    }
+//    #[Route('/workouts/trainer', name: 'app_workout_trainer')]
+//    public function indexTrainer(WorkoutRepository $workoutRepository): Response
+//    {
+//        $workouts = $workoutRepository->findAllWithUser();
+//
+//        return $this->render('workout/indexTrainer.html.twig', [
+//            'workouts' => $workouts,
+//        ]);
+//    }
 
     #[Route('/workout/create', name: 'workout_create')]
     public function store(Request $request, WorkoutService $workoutService): Response
@@ -80,16 +86,16 @@ class WorkoutController extends AbstractController
         ]);
     }
 
-//    #[Route('/workout/{id}', name: 'app_workout_details')]
-//    public function show(WorkoutRepository $workoutRepository, $id): Response
-//    {
-//
-//
-//        $workout = $workoutRepository->find($id);
-//
-//        return $this->render('workout/show.html.twig', [
-//            'controller_name' => 'WorkoutController',
-//            'workout' => $workout,
-//        ]);
-//    }
+    #[Route('/workout/details/{id}', name: 'app_workout_details')]
+    public function show(WorkoutRepository $workoutRepository, $id): Response
+    {
+
+
+        $workout = $workoutRepository->find($id);
+
+        return $this->render('workout/show.html.twig', [
+            'controller_name' => 'WorkoutController',
+            'workout' => $workout,
+        ]);
+    }
 }
