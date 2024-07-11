@@ -29,9 +29,13 @@ class WorkoutController extends AbstractController
         }
         $workouts = $workoutService->findWorkoutsByUser($user);
 
+        $workoutDurations = $workoutService->getWorkoutDurations($workouts);
+
+
         return $this->render('workout/index.html.twig', [
             'controller_name' => 'WorkoutController',
             'workouts' => $workouts,
+            'workoutDurations' => $workoutDurations,
         ]);
     }
 

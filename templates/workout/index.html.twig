@@ -20,7 +20,6 @@
         .button-group button {
             padding: 8px 16px;
             cursor: pointer;
-            background-color: var(--primary-color);
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -43,6 +42,7 @@
                 <th scope="col">Index</th>
                 <th scope="col">Name</th>
                 <th scope="col">Performed At</th>
+                <th scope="col">Duration</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -51,12 +51,25 @@
                 <tr>
                     <td>{{ workout.id }}</td>
                     <td>{{ workout.name }}</td>
-                    <td>{{ workout.createdAt|date("m/d/Y h:m")}}</td>
-                    <td> <form action="{{ path('delete_workout', { 'id': workout.id }) }}" method="POST">
-                            <button type="submit" class="btn btn-danger ml-1">
-                                Delete
-                            </button>
-                        </form>
+                    <td>{{ workout.createdAt|date("m/d/Y h:m") }}</td>
+                    <td>{{ workoutDurations[workout.id] }} min</td>
+                    <td>
+
+                        <div class ="btn-group" role="group">
+
+                            <form action="{{ path('app_workout_details', { 'id': workout.id }) }}" method="GET">
+                                <button type="submit" class="btn btn-primary">
+                                    Show
+                                </button>
+                            </form>
+
+                            <form action="{{ path('delete_workout', { 'id': workout.id }) }}" method="POST">
+                                <button type="submit" class="btn btn-danger ml-1">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </div>
                     </td>
                 </tr>
             {% else %}
