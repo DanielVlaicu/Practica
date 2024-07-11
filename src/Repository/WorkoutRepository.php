@@ -46,6 +46,12 @@ class WorkoutRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function delete(Workout $workout): void
+    {
+        $this->getEntityManager()->remove($workout);
+        $this->getEntityManager()->flush();
+    }
+
 
     //    public function findOneBySomeField($value): ?Workout
     //    {

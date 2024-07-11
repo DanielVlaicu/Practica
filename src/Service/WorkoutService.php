@@ -37,4 +37,14 @@ class WorkoutService
     {
         return $this->workoutRepository->findAllWithUser();
     }
+
+    public function deleteWorkout(Workout $workout): void
+    {
+        $this->workoutRepository->delete($workout);
+    }
+
+    public function getWorkoutById($workoutId): object
+    {
+        return $this->workoutRepository->find($workoutId);
+    }
 }

@@ -13,6 +13,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Date</th>
                 <th scope="col">Client</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -22,6 +23,12 @@
                     <td>{{ workout.name }}</td>
                     <td>{{ workout.createdAt|date("m/d/Y H:i") }}</td>
                     <td>{{ workout.person.name }}</td>
+                    <td> <form action="{{ path('delete_workout', { 'id': workout.id }) }}" method="POST">
+                            <button type="submit" class="btn btn-danger ml-1">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             {% else %}
                 <tr>

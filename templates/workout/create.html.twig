@@ -25,13 +25,29 @@
             display: inline-block;
             margin-top: 10px;
         }
+
+        .remove_item_link {
+            margin-top: 10px;
+            color: white;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
+    <div class="container">
         <h1>Create Workout</h1>
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
         {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="exerciseLogs">Add an Exercise Log</button>
 
         <ul class="exerciseLogs"
             data-index="{{ form.exerciseLogs|length > 0 ? form.exerciseLogs|last.vars.name + 1 : 0 }}"
@@ -44,8 +60,14 @@
                 </li>
             {% endfor %}
         </ul>
-        <button type="button" class="btn btn-primary add_item_link" data-collection-holder-class="exerciseLogs">Add a Exercise Log</button>
+
+        <div class="form-group">
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
         {{ form_end(form) }}
+
+        <a href="{{ path('app_workout') }}" class="btn btn-secondary mt-3">Back to Workouts List</a>
     </div>
 
     <script>
@@ -73,7 +95,6 @@
 
             collectionHolder.dataset.index++;
 
-
             const removeFormButton = document.createElement('button');
             removeFormButton.innerText = 'Remove this Exercise Log';
             removeFormButton.classList.add('btn', 'btn-danger', 'remove_item_link');
@@ -86,7 +107,6 @@
                 item.remove();
             });
         }
-
 
         document
             .querySelectorAll('.remove_item_link')

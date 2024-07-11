@@ -98,4 +98,21 @@ class WorkoutController extends AbstractController
             'workout' => $workout,
         ]);
     }
+
+    #[Route('/workout/{id}/delete', name: 'delete_workout')]
+    public function destroy(Request $request, WorkoutService $workoutService, $id): Response
+    {
+
+        $workout = $workoutService->getWorkoutById($id);
+
+        if (!$workout) {
+            throw $this->createNotFoundException('The exercise does not exist');
+        }
+
+        $workoutService->deleteWorkout($workout);
+        $this->addFlash('success', 'workout deleted successfully');
+        return $this->redirectToRoute('app_workout');
+
+    }
 }
+

@@ -24,10 +24,12 @@ class WorkoutType extends AbstractType
                 'allow_add'=>true,
                 'by_reference'=>false,
                 'allow_delete'=>true,
-                ])
 
-            ->add('button', SubmitType::class, [
-                'label' => 'Add',
+
+
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Create Workout',
         ]);
 
     }
