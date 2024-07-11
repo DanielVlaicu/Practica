@@ -22,6 +22,7 @@ class ExerciseLog
     #[ORM\Column]
     private ?int $sets = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'exerciseLogs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Workout $workout = null;
@@ -94,4 +95,6 @@ class ExerciseLog
 
         return $this;
     }
+
+
 }

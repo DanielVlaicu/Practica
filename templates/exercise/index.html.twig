@@ -4,7 +4,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 {% endblock %}
 
 {% block body %}
@@ -28,13 +29,19 @@
                     <td>{{ exercise.getMuscleGroup().getName() }}</td>
                     <td>
                         <div class="btn-group" role="group">
+                            <form action="{{ path('exercise_logs', { 'id': exercise.id }) }}" method="GET">
+                                <button type="submit" class="btn btn-primary mr-1">
+                                    Show
+                                </button>
+                            </form>
+
                             <form action="{{ path('edit_exercise', { 'id': exercise.id }) }}" method="GET">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary mr-1">
                                     Edit
                                 </button>
                             </form>
                             <form action="{{ path('delete_exercise', { 'id': exercise.id }) }}" method="POST">
-                                <button type="submit" class="btn btn-danger ml-1">
+                                <button type="submit" class="btn btn-danger">
                                     Delete
                                 </button>
                             </form>

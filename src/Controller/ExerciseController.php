@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Exercise;
 use App\Entity\MuscleGroup;
 use App\Form\ExerciseType;
+use App\Repository\ExerciseLogRepository;
 use App\Repository\ExerciseRepository;
 use App\Service\ExerciseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -112,5 +113,17 @@ class ExerciseController extends AbstractController
             'exercises' => $exercises,
         ]);
     }
+
+    #[Route('/exercise/{id}/logs', name: 'exercise_logs')]
+    public function showLogs(ExerciseLogRepository $exerciseLogRepository, int $id,): Response
+    {
+        $user = $this->getUser();
+        $logs = $exerciseLogRepository->findLogsByExerciseAndUser($id, $user->getId());
+
+        return $this->render('exercise/logs.html.twig', [
+            'logs' => $logs,
+        ]);
+    }
+
 
 }
