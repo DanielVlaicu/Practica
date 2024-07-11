@@ -31,8 +31,7 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
+
 
             $user = $form->getData();
             $password = $passwordHasher->hashPassword($user, $user->getPassword());
@@ -43,7 +42,7 @@ class UserController extends AbstractController
             $userRepository->saveUser($user);
 
 
-            // ... perform some action, such as saving the task to the database
+
 
             return $this->redirectToRoute('app_login');
         }
